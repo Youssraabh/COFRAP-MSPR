@@ -1,12 +1,20 @@
-"""generate-2fa : génère le secret TOTP d'un compte et son QR otpauth.
+"""generate-password : crée/renouvelle le mot de passe d'un compte.
 
 Entrée  : {"username": "michel.ranu"}
-Sortie  : {"username", "qrcode" (PNG base64 otpauth), "gendate"}
-Effet   : stocke le secret chiffré (Fernet), expired=0.
+Sortie  : {"username", "password", "qrcode" (PNG base64 du mot de passe), "gendate"}
+Effet   : stocke le hash bcrypt + gendate, expired=0.
 """
 import json
 
-import cofrap_common as cc
+
+import sys
+import os
+
+sys.path.append(os.path.dirname(__file__))
+
+
+from function import cofrap_common as cc
+
 
 
 def handle(event, context):
@@ -19,13 +27,9 @@ def handle(event, context):
     if not username:
         return {"statusCode": 400, "body": json.dumps({"error": "username requis"})}
 
-    if not cc.user_exists(username):
-        return {"statusCode": 404, "body": json.dumps({"error": "compte inexistant"})}
-
-    secret = cc.generate_totp_secret()
+    password = cc.generate_password()
     gendate = cc.now_epoch()
-    cc.update_mfa(username, cc.encrypt_secret(secret), gendate)
-    uri = cc.totp_uri(username, secret)
+    cc.upsert_password(username, cc.hash_password(password), gendate)
 
     return {
         "statusCode": 200,
@@ -33,7 +37,8 @@ def handle(event, context):
         "body": json.dumps(
             {
                 "username": username,
-                "qrcode": cc.qr_png_base64(uri),
+                "password": password,
+                "qrcode": cc.qr_png_base64(password),
                 "gendate": gendate,
             }
         ),

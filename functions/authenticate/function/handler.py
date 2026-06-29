@@ -10,7 +10,16 @@ Sortie :
 """
 import json
 
-import cofrap_common as cc
+
+
+import sys
+import os
+
+sys.path.append(os.path.dirname(__file__))
+
+
+from function import cofrap_common as cc
+
 
 
 def handle(event, context):
