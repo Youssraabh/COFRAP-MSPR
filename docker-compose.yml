@@ -7,11 +7,40 @@ services:
       POSTGRES_PASSWORD: cofrap
     ports: ["5432:5432"]
     volumes:
+      - pg_data:/var/lib/postgresql/data
       - ./deploy/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cofrap -d cofrap"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  gateway:
+    build: ./gateway
+    environment:
+      FUNCTIONS_DIR: /functions
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_NAME: cofrap
+      DB_USER: cofrap
+      DB_PASSWORD: cofrap
+      # Clé Fernet de développement (32 octets base64 url-safe).
+      # À remplacer par une vraie clé en production : python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+      COFRAP_FERNET_KEY: ${COFRAP_FERNET_KEY:-AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQE=}
+    volumes:
+      - ./functions:/functions:ro
+    ports: ["8080:8080"]
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   frontend:
     build: ./frontend
     environment:
       OPENFAAS_GATEWAY: http://gateway:8080
     ports: ["8000:8000"]
-    depends_on: [postgres]
+    depends_on:
+      - gateway
+
+volumes:
+  pg_data:
