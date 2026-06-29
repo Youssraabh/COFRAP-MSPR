@@ -1,0 +1,1 @@
+"""Module partagé COFRAP (tests)."""

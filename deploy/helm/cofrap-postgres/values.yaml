@@ -1,0 +1,7 @@
+namespace: cofrap
+image: postgres:16-alpine
+storageSize: 2Gi
+db:
+  name: cofrap
+  user: cofrap
+  password: "ChangeMe-Strong-Pwd"   # surcharger via --set en prod

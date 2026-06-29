@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cofrap-postgres
+description: Base PostgreSQL COFRAP (table users) pour le PoC serverless
+type: application
+version: 0.1.0
+appVersion: "16"

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Résultat — COFRAP{% endblock %}
+{% block content %}
+<section class="card">
+  <h2 class="err">✖ Échec de l'authentification (HTTP {{ code }})</h2>
+  <p>Identifiants ou code 2FA invalides.</p>
+  <a href="/login"><button>Réessayer</button></a>
+</section>
+{% endblock %}

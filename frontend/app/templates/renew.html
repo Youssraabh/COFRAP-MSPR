@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Renouvellement — COFRAP{% endblock %}
+{% block content %}
+<section class="card">
+  <h2 class="warn">⏳ Identifiants expirés (&gt; 6 mois)</h2>
+  <p>Vos identifiants doivent être renouvelés. Confirmez pour régénérer
+     mot de passe et 2FA.</p>
+  <form method="post" action="/renew">
+    <label for="u">Nom d'utilisateur</label>
+    <input id="u" name="username" value="{{ username }}" required>
+    <button type="submit">Renouveler mes identifiants</button>
+  </form>
+</section>
+{% endblock %}

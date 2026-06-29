@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Connexion — COFRAP{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Connexion</h2>
+  <form method="post" action="/login">
+    <label for="u">Utilisateur</label>
+    <input id="u" name="username" required>
+    <label for="p">Mot de passe</label>
+    <input id="p" name="password" type="password" required>
+    <label for="o">Code 2FA</label>
+    <input id="o" name="totp_code" inputmode="numeric" pattern="[0-9]*" required>
+    <button type="submit">Se connecter</button>
+  </form>
+</section>
+<p><a href="/">Créer un compte</a></p>
+{% endblock %}

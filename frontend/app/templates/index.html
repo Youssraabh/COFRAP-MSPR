@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Accueil — COFRAP{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Bienvenue</h2>
+  <p>Démonstration d'authentification sécurisée : mot de passe 24 caractères,
+     2FA TOTP obligatoire, rotation tous les 6 mois.</p>
+  <p><a href="/create"><button>Créer un compte</button></a>
+     <a href="/login"><button>Se connecter</button></a></p>
+</section>
+{% endblock %}

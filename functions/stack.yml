@@ -1,0 +1,41 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+configuration:
+  templates:
+    - name: python3-http
+functions:
+  generate-password:
+    lang: python3-http
+    handler: ./generate-password
+    image: ghcr.io/cofrap/generate-password:latest
+    secrets:
+      - db-host
+      - db-port
+      - db-name
+      - db-user
+      - db-password
+      - totp-encryption-key
+  generate-2fa:
+    lang: python3-http
+    handler: ./generate-2fa
+    image: ghcr.io/cofrap/generate-2fa:latest
+    secrets:
+      - db-host
+      - db-port
+      - db-name
+      - db-user
+      - db-password
+      - totp-encryption-key
+  authenticate:
+    lang: python3-http
+    handler: ./authenticate
+    image: ghcr.io/cofrap/authenticate:latest
+    secrets:
+      - db-host
+      - db-port
+      - db-name
+      - db-user
+      - db-password
+      - totp-encryption-key

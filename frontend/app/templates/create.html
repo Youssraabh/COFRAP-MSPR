@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Créer un compte — COFRAP{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Créer un compte</h2>
+  <p>Un mot de passe robuste et une 2FA seront générés automatiquement.</p>
+  <form method="post" action="/create">
+    <label for="u">Nom d'utilisateur</label>
+    <input id="u" name="username" required autofocus>
+    <button type="submit">Générer mon compte</button>
+  </form>
+</section>
+<p><a href="/login">J'ai déjà un compte — me connecter</a></p>
+{% endblock %}

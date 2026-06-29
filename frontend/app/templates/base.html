@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}COFRAP{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header role="banner"><h1>COFRAP — Authentification sécurisée</h1></header>
+  <main id="main" role="main" tabindex="-1">{% block content %}{% endblock %}</main>
+  <footer role="contentinfo"><small>PoC serverless OpenFaaS · K3S · PostgreSQL</small></footer>
+</body>
+</html>

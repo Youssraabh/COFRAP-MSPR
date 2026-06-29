@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}QR codes — COFRAP{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Compte « {{ username }} » créé</h2>
+  <p>Scannez les deux QR codes, ils ne sont affichés qu'une fois.</p>
+  <div class="qr-row">
+    <figure>
+      <h3>Mot de passe</h3>
+      <img src="data:image/png;base64,{{ password_qr }}" alt="QR code du mot de passe">
+      <figcaption><code>{{ password }}</code></figcaption>
+    </figure>
+    <figure>
+      <h3>2FA (TOTP)</h3>
+      <img src="data:image/png;base64,{{ mfa_qr }}" alt="QR code 2FA à scanner dans une app d'authentification">
+      <figcaption>Scanner dans Google/Microsoft Authenticator</figcaption>
+    </figure>
+  </div>
+  <a href="/login"><button>Se connecter</button></a>
+</section>
+{% endblock %}

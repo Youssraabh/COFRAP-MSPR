@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Connexion réussie — COFRAP{% endblock %}
+{% block content %}
+<section class="card">
+  <h2 class="ok">✔ Authentification réussie</h2>
+  <p>Bienvenue {{ username }}. Votre compte est valide.</p>
+  <a href="/"><button>Accueil</button></a>
+</section>
+{% endblock %}
